@@ -30,20 +30,49 @@ class User {
 
     // Method to register a new user
     public static User register(Scanner scanner) {
-        System.out.println("Enter your name: ");
-        String name = scanner.nextLine();
-        System.out.println("Enter your email: ");
-        String email = scanner.nextLine();
-        System.out.println("Enter your citizenship number: ");
-        String citizenshipNumber = scanner.nextLine();
-        System.out.println("Enter your password: ");
-        String password = scanner.nextLine();
-        System.out.println("Select your role (1. Normal User, 2. Admin): ");
-        int roleChoice = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        String name;
+        do {
+            System.out.println("Enter your name: ");
+            name = scanner.nextLine().trim();
+            if (name.isEmpty()) System.out.println("Name cannot be empty!");
+        } while (name.isEmpty());
+    
+        String email;
+        do {
+            System.out.println("Enter your email: ");
+            email = scanner.nextLine().trim();
+            if (email.isEmpty()) System.out.println("Email cannot be empty!");
+        } while (email.isEmpty());
+    
+        String citizenshipNumber;
+        do {
+            System.out.println("Enter your citizenship number: ");
+            citizenshipNumber = scanner.nextLine().trim();
+            if (citizenshipNumber.isEmpty()) System.out.println("Citizenship number cannot be empty!");
+        } while (citizenshipNumber.isEmpty());
+    
+        String password;
+        do {
+            System.out.println("Enter your password: ");
+            password = scanner.nextLine().trim();
+            if (password.isEmpty()) System.out.println("Password cannot be empty!");
+        } while (password.isEmpty());
+    
+        int roleChoice;
+        while (true) {
+            System.out.println("Select your role (1. Normal User, 2. Admin): ");
+            String input = scanner.nextLine();
+            try {
+                roleChoice = Integer.parseInt(input);
+                if (roleChoice == 1 || roleChoice == 2) break;
+                else System.out.println("Invalid choice. Enter 1 or 2.");
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Enter a number.");
+            }
+        }
         String role = (roleChoice == 1) ? "NormalUser" : "Admin";
-
-        String userID = "USER" + (new Random().nextInt(9000) + 1000); // Generate a random userID
+    
+        String userID = "USER" + (new Random().nextInt(9000) + 1000);
         return new User(userID, name, role, email, citizenshipNumber, password);
     }
 
