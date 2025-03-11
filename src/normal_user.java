@@ -15,8 +15,8 @@ class NormalUser extends User {
         int age = scanner.nextInt();
         scanner.nextLine(); // Consume newline
 
-        if (category.equals("A") && age < 18) {
-            System.out.println("You must be at least 18 years old to apply for Category A.");
+        if (age < 18) {
+            System.out.println("You must be at least 18 years old to apply for Category " + category + ".");
             return;
         }
 
